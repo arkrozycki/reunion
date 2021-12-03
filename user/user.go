@@ -10,8 +10,13 @@ import (
 	"github.com/arkrozycki/reunion/util"
 )
 
-var log = logger.Get()
-var db = datastore.GetDatastore()
+// some vars of course
+var (
+	db            = datastore.GetDatastore()
+	log           = logger.Get()
+	ErrExists     = errors.New("record exists")
+	ErrBadRequest = errors.New("bad request")
+)
 
 // UserType int32 enum
 type UserType int32
@@ -30,11 +35,6 @@ const (
 	Unverified UserStatus = 0
 	Verified   UserStatus = 1
 	Disabled   UserStatus = 2
-)
-
-var (
-	ErrExists     = errors.New("record exists")
-	ErrBadRequest = errors.New("bad request")
 )
 
 // User struct
@@ -86,6 +86,7 @@ func (u *User) Register() (string, error) {
 		return "", err
 	}
 	return code, nil
+
 }
 
 // Get method

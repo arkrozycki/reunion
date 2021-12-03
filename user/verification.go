@@ -13,23 +13,24 @@ type Verification struct {
 	Code      string `json:"code"`
 	CreatedAt int64  `json:"created_at"`
 	ExpiresAt int64  `json:"expires_at"`
-	Completed bool
+	Completed bool   `json:"completed"`
 }
 
 const codeLen = 8
 
 var (
+	letterRunes       = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	AddExpirationSecs = int64(86400)
+
 	ErrAlreadyVerified = errors.New("code already verified")
 	ErrCodeExpired     = errors.New("code expired")
 	ErrCodeMismatch    = errors.New("code not matched")
 )
 
+// init method
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
-
-var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-var AddExpirationSecs = int64(86400)
 
 // SaveVerificationCode method
 // create a record for the key

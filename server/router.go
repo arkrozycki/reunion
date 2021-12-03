@@ -15,9 +15,9 @@ func (r *Router) New() *Router {
 
 // AddRoutes method
 func (r *Router) AddRoutes() *Router {
-	r.router.HandleFunc("/", HandleRoot)
-	r.router.HandleFunc("/register", HandleUserRegistration)
-	r.router.HandleFunc("/user", HandleUser)
-	r.router.HandleFunc("/user/verify", HandleUserVerify)
+	r.router.HandleFunc("/", HandleRoot).Methods("GET")
+	r.router.HandleFunc("/register", HandleUserRegistration).Methods("POST")
+	r.router.HandleFunc("/user", HandleUser).Methods("GET")
+	r.router.HandleFunc("/user/verify", HandleUserVerify).Methods("POST")
 	return r
 }

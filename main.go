@@ -20,9 +20,8 @@ func main() {
 		log.Fatal().Err(err)
 	}
 
+	// start graceful shutdown
 	if exit {
-		// start graceful shutdown
 		log.Info().Msg("Service graceful shutdown started ...")
 	}
-
 }
